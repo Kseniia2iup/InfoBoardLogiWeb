@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:o="http://omnifaces.org/ui">
+
+<h:head>
+    <title>LogiWeb Information Board</title>
+    <h:outputStylesheet name="css/main.css"  />
+</h:head>
+<h:body>
+
+    <div id="wrapper">
+            <div id="main">
+                <div id="cool-big-title">
+                    <div class="title">
+                        <h2>LogiWeb Information Board</h2>
+                    </div>
+                </div>
+                <!-- Post -->
+                <div class="post">
+        <h2>Last Orders Info</h2>
+        <h:dataTable id="ordersInfo" value="#{infoBoardDataBean.getInformation().lastTenOrders}" var="order">
+            <h:column>
+                <f:facet name="header">ID</f:facet>
+                #{order.id}
+            </h:column>
+            <h:column>
+                <f:facet name="header">STATUS</f:facet>
+                #{order.orderStatus}
+            </h:column>
+            <h:column>
+                <f:facet name="header">CARGOES</f:facet>
+                #{order.cargoes}
+            </h:column>
+            <h:column>
+                <f:facet name="header">TRUCK</f:facet>
+                #{order.truck}
+            </h:column>
+            <h:column>
+                <f:facet name="header">DRIVERS</f:facet>
+                #{order.drivers}
+            </h:column>
+        </h:dataTable>
+        <h:form>
+            <o:socket channel="push">
+                <f:ajax event="update" render=":ordersInfo"/>
+            </o:socket>
+        </h:form>
+
+        <h2>Drivers Info</h2>
+        <h:dataTable id="driversInfo" value="#{infoBoardDataBean.getInformation()}" var="info">
+            <h:column>
+                <f:facet name="header">ALL DRIVERS</f:facet>
+                #{info.allDrivers}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">DRIVERS BUSY</f:facet>
+                #{info.driversOnOrder}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">FREE DRIVERS</f:facet>
+                #{info.freeDrivers}
+            </h:column>
+        </h:dataTable>
+        <h:form>
+            <o:socket channel="push">
+                <f:ajax event="update" render=":driversInfo"/>
+            </o:socket>
+        </h:form>
+
+        <h2>Trucks Info</h2>
+        <h:dataTable id="trucksInfo" value="#{infoBoardDataBean.getInformation()}" var="info">
+            <h:column>
+                <f:facet name="header">ALL TRUCKS</f:facet>
+                #{info.allTrucks}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">TRUCKS BUSY</f:facet>
+                #{info.trucksOnOrder}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">TRUCKS AVAILABLE</f:facet>
+                #{info.availableTrucks}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">TRUCKS BROKEN</f:facet>
+                #{info.brokenTrucks}
+            </h:column>
+        </h:dataTable>
+        <h:form>
+            <o:socket channel="push">
+                <f:ajax event="update" render=":trucksInfo"/>
+            </o:socket>
+        </h:form>
+                </div>
+            </div>
+    </div>
+</h:body>
+</html>
