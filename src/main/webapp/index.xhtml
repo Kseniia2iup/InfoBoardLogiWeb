@@ -45,9 +45,9 @@
             </h:column>
         </h:dataTable>
         <h:form>
-            <o:socket channel="push">
+            <f:websocket channel="push">
                 <f:ajax event="update" render=":ordersInfo"/>
-            </o:socket>
+            </f:websocket>
         </h:form>
 
         <h2>Drivers Info</h2>
@@ -68,9 +68,9 @@
             </h:column>
         </h:dataTable>
         <h:form>
-            <o:socket channel="push">
+            <f:websocket channel="push">
                 <f:ajax event="update" render=":driversInfo"/>
-            </o:socket>
+            </f:websocket>
         </h:form>
 
         <h2>Trucks Info</h2>
@@ -96,9 +96,9 @@
             </h:column>
         </h:dataTable>
         <h:form>
-            <o:socket channel="push">
+            <f:websocket channel="push">
                 <f:ajax event="update" render=":trucksInfo"/>
-            </o:socket>
+            </f:websocket>
         </h:form>
                 </div>
             </div>

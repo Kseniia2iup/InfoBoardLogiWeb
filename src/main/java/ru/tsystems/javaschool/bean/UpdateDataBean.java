@@ -1,5 +1,7 @@
 package ru.tsystems.javaschool.bean;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.tsystems.javaschool.model.InfoDto;
 
 import javax.ejb.Startup;
@@ -14,16 +16,19 @@ import java.io.Serializable;
 @ApplicationScoped
 public class UpdateDataBean implements Serializable {
 
-    @Inject
-    @Push(channel = "push")
-    PushContext pushContext;
+    private static final Logger LOGGER = LoggerFactory.getLogger(UpdateDataBean.class);
 
     @Inject
-    ObjectReceiverBean objectReceiverBean;
+    @Push(channel = "push")
+    PushContext pusher;
+
+    @Inject
+    private ObjectReceiverBean objectReceiverBean;
 
     private InfoDto information;
 
     public InfoDto getInformation() {
+        LOGGER.info("From UpdateDataBean getting information");
         return information;
     }
 
@@ -33,8 +38,9 @@ public class UpdateDataBean implements Serializable {
 
     public void observeUpdateActivity(@Observes String message) {
         information = objectReceiverBean.getInfoForUpdate();
-        System.out.println("INFORMATION UPDATeDATaBean: " + information);
-        pushContext.send("update");
+        LOGGER.info("From UpdateDataBean method observeUpdateActivity got new information " +
+                "from ObjectReceiverBean: \n{}", information);
+        pusher.send("update");
     }
 
 }

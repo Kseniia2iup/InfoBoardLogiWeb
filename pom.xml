@@ -12,6 +12,35 @@
 
     <dependencies>
 
+        <!-- Logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.16</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- Java common logging (jcl) (Apache, Spring etc.) redirect to slf4j -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>1.7.16</version>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- Java util logging (jul) redirect to slf4j -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
+            <version>1.7.25</version>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- Implementation of slf4j for using in project -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+            <scope>runtime</scope>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api -->
         <dependency>
             <groupId>javax.ws.rs</groupId>
@@ -87,7 +116,15 @@
         </dependency> -->
 
     </dependencies>
-
+<!--
+    <distributionManagement>
+        <snapshotRepository>
+            <id>InfoBoardLogiWeb</id>
+            <name>InfoBoardLogiWeb</name>
+            <url>http://127.0.0.1:8080/InfoBoardLogiWeb</url>
+        </snapshotRepository>
+    </distributionManagement>
+    -->
     <build>
         <finalName>infoBoardLogiWeb</finalName>
         <plugins>
@@ -99,6 +136,11 @@
                     <source>1.6</source>
                     <target>1.6</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>1.0.1.Final</version>
             </plugin>
         </plugins>
     </build>
