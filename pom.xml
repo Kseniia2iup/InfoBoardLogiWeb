@@ -48,6 +48,21 @@
             <version>2.1</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.jboss.resteasy/resteasy-client -->
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-client</artifactId>
+            <version>3.5.1.Final</version>
+        </dependency>
+
+        <!-- WebSocket -->
+        <dependency>
+            <groupId>javax.websocket</groupId>
+            <artifactId>javax.websocket-api</artifactId>
+            <version>1.1</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.omnifaces/omnifaces -->
         <dependency>
             <groupId>org.omnifaces</groupId>
@@ -101,30 +116,8 @@
             <version>3.2.2</version>
         </dependency>
 
-        <!-- Atmosphere
-        <dependency>
-            <groupId>org.atmosphere</groupId>
-            <artifactId>atmosphere-runtime</artifactId>
-            <version>1.0.0.RC1</version>
-        </dependency>
-
-        PrimeFaces
-        <dependency>
-            <groupId>org.primefaces</groupId>
-            <artifactId>primefaces</artifactId>
-            <version>6.0</version>
-        </dependency> -->
-
     </dependencies>
-<!--
-    <distributionManagement>
-        <snapshotRepository>
-            <id>InfoBoardLogiWeb</id>
-            <name>InfoBoardLogiWeb</name>
-            <url>http://127.0.0.1:8080/InfoBoardLogiWeb</url>
-        </snapshotRepository>
-    </distributionManagement>
-    -->
+
     <build>
         <finalName>infoBoardLogiWeb</finalName>
         <plugins>
@@ -133,8 +126,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.1</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
             <plugin>

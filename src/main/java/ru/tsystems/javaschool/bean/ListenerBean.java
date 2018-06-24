@@ -1,12 +1,8 @@
 package ru.tsystems.javaschool.bean;
 
 import com.rabbitmq.client.*;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.tsystems.javaschool.model.InfoDto;
-import ru.tsystems.javaschool.model.OrderDto;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -16,14 +12,15 @@ import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.List;
 import java.util.concurrent.TimeoutException;
+
 
 @Startup
 @Singleton
 public class ListenerBean implements Serializable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ListenerBean.class);
+
 
     @Inject
     private UpdateDataBean updateDataBean;
@@ -37,11 +34,14 @@ public class ListenerBean implements Serializable {
     private Channel channel;
 
     @PostConstruct
+    public void updateAfterDeploy(){
+        LOGGER.info("From ListenerBean method init: Calling updateDataBean after deploy");
+        updateDataBean.observeUpdateActivity("update");
+        init();
+    }
+
     public void init() {
         try {
-            LOGGER.info("From ListenerBean method init: Calling updateDataBean after deploy");
-            updateDataBean.observeUpdateActivity("update");
-
             factory.setHost("localhost");
             connection = factory.newConnection();
             channel = connection.createChannel();

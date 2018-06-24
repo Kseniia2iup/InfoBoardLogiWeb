@@ -4,15 +4,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.tsystems.javaschool.model.InfoDto;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Startup;
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.push.Push;
 import javax.faces.push.PushContext;
 import javax.inject.Inject;
 import java.io.Serializable;
 
-@Startup
+
+//@Startup
 @ApplicationScoped
 public class UpdateDataBean implements Serializable {
 
@@ -20,7 +22,7 @@ public class UpdateDataBean implements Serializable {
 
     @Inject
     @Push(channel = "push")
-    PushContext pusher;
+    private PushContext pusher;
 
     @Inject
     private ObjectReceiverBean objectReceiverBean;
@@ -28,7 +30,6 @@ public class UpdateDataBean implements Serializable {
     private InfoDto information;
 
     public InfoDto getInformation() {
-        LOGGER.info("From UpdateDataBean getting information");
         return information;
     }
 

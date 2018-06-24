@@ -1,24 +1,25 @@
 package ru.tsystems.javaschool.bean;
 
+import org.jboss.resteasy.client.jaxrs.ResteasyClient;
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.tsystems.javaschool.model.InfoDto;
 
 import javax.ejb.Singleton;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
+import java.io.Serializable;
+
 
 @Singleton
-public class ObjectReceiverBean {
+public class ObjectReceiverBean implements Serializable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ObjectReceiverBean.class);
 
-    private Client client = ClientBuilder.newClient();
+    ResteasyClient client = new ResteasyClientBuilder().build();
 
     public InfoDto getInfoForUpdate(){
-        String uri = "http://127.0.0.1:8181/trucking/emit";
-        WebTarget target = client.target(uri);
+        ResteasyWebTarget target = client.target("http://127.0.0.1:8181/trucking/emit");
         LOGGER.info("From ObjectReceiverBean method getInfoForUpdate receiving request " +
                 "from http://127.0.0.1:8181/trucking/emit");
         return target.request()

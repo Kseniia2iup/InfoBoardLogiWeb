@@ -4,12 +4,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.tsystems.javaschool.model.InfoDto;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.io.Serializable;
 
-@ManagedBean(name = "infoBoardDataBean")
+@Named
 @SessionScoped
 public class InfoBoardDataBean implements Serializable {
     private static final Logger LOGGER = LoggerFactory.getLogger(InfoBoardDataBean.class);
@@ -18,7 +18,6 @@ public class InfoBoardDataBean implements Serializable {
     private UpdateDataBean updateDataBean;
 
     public InfoDto getInformation(){
-        LOGGER.info("From InfoBoardDataBean method getInformation: getting information");
         return updateDataBean.getInformation();
     }
 }
